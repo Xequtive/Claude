@@ -1,0 +1,206 @@
+{
+ "Postage REFUND 1": {
+  "rule_id": "1635470000001151378",
+  "rule_name": "Postage REFUND 1",
+  "target_accounts": [],
+  "accounts": [],
+  "target_accounts_count": -1,
+  "rule_order": 247,
+  "rule_category": "all_accounts",
+  "apply_to": "deposits",
+  "criteria_type": "or",
+  "auto_categorize": "recognize",
+  "branch_id": "1635470000000095051",
+  "branch_name": "Head Office",
+  "location_id": "1635470000000095051",
+  "location_name": "Head Office",
+  "criterion": [
+   {
+    "criteria_id": "1635470000001548646",
+    "field": "description",
+    "comparator": "contains",
+    "value": "USPS"
+   }
+  ],
+  "record_as": "expense_refund",
+  "account_id": "1635470000000000436",
+  "account_name": "Postage",
+  "tax_id": "",
+  "tax_name": "",
+  "tax_percentage": 0,
+  "customer_id": "",
+  "customer_name": "",
+  "vendor_country_code": "",
+  "reference_number": "from_statement",
+  "payment_mode": "",
+  "tags": []
+ },
+ "How 2 Be Whole (H2BW) - Expenses REFUND 1": {
+  "rule_id": "1635470000001128486",
+  "rule_name": "How 2 Be Whole (H2BW) - Expenses REFUND 1",
+  "target_accounts": [],
+  "accounts": [],
+  "target_accounts_count": -1,
+  "rule_order": 239,
+  "rule_category": "all_accounts",
+  "apply_to": "deposits",
+  "criteria_type": "or",
+  "auto_categorize": "recognize",
+  "branch_id": "1635470000000095051",
+  "branch_name": "Head Office",
+  "location_id": "1635470000000095051",
+  "location_name": "Head Office",
+  "criterion": [
+   {
+    "criteria_id": "1635470000001548614",
+    "field": "description",
+    "comparator": "contains",
+    "value": "THREEJEWELS"
+   }
+  ],
+  "record_as": "expense_refund",
+  "account_id": "1635470000000370572",
+  "account_name": "How 2 Be Whole (H2BW) - Expenses",
+  "tax_id": "",
+  "tax_name": "",
+  "tax_percentage": 0,
+  "customer_id": "",
+  "customer_name": "",
+  "vendor_country_code": "",
+  "reference_number": "from_statement",
+  "payment_mode": "",
+  "tags": []
+ },
+ "Internet/Cable REFUND 1": {
+  "rule_id": "1635470000001151373",
+  "rule_name": "Internet/Cable REFUND 1",
+  "target_accounts": [],
+  "accounts": [],
+  "target_accounts_count": -1,
+  "rule_order": 246,
+  "rule_category": "all_accounts",
+  "apply_to": "deposits",
+  "criteria_type": "or",
+  "auto_categorize": "recognize",
+  "branch_id": "1635470000000095051",
+  "branch_name": "Head Office",
+  "location_id": "1635470000000095051",
+  "location_name": "Head Office",
+  "criterion": [
+   {
+    "criteria_id": "1635470000001720709",
+    "field": "description",
+    "comparator": "contains",
+    "value": "OPTIMUM"
+   },
+   {
+    "criteria_id": "1635470000001720710",
+    "field": "description",
+    "comparator": "contains",
+    "value": "GOOGLE SERVICES"
+   }
+  ],
+  "record_as": "expense_refund",
+  "account_id": "1635470000000340298",
+  "account_name": "Internet/Cable",
+  "tax_id": "",
+  "tax_name": "",
+  "tax_percentage": 0,
+  "customer_id": "",
+  "customer_name": "",
+  "vendor_country_code": "",
+  "reference_number": "from_statement",
+  "payment_mode": "",
+  "tags": []
+ },
+ "Repairs & Maintenance - Owner Direct REFUND 1": {
+  "rule_id": "1635470000001173027",
+  "rule_name": "Repairs & Maintenance - Owner Direct REFUND 1",
+  "target_accounts": [],
+  "accounts": [],
+  "target_accounts_count": -1,
+  "rule_order": 255,
+  "rule_category": "all_accounts",
+  "apply_to": "deposits",
+  "criteria_type": "or",
+  "auto_categorize": "recognize",
+  "branch_id": "1635470000000095051",
+  "branch_name": "Head Office",
+  "location_id": "1635470000000095051",
+  "location_name": "Head Office",
+  "criterion": [
+   {
+    "criteria_id": "1635470000001725909",
+    "field": "description",
+    "comparator": "contains",
+    "value": "HOME DEPOT"
+   },
+   {
+    "criteria_id": "1635470000001725910",
+    "field": "description",
+    "comparator": "contains",
+    "value": "LOWES"
+   },
+   {
+    "criteria_id": "1635470000001725911",
+    "field": "description",
+    "comparator": "contains",
+    "value": "SUPER HOME INC"
+   },
+   {
+    "criteria_id": "1635470000001725912",
+    "field": "description",
+    "comparator": "contains",
+    "value": "HOMEDEPOT.COM"
+   },
+   {
+    "criteria_id": "1635470000001725913",
+    "field": "description",
+    "comparator": "contains",
+    "value": "TRANSPARENT AIR"
+   },
+   {
+    "criteria_id": "1635470000001725914",
+    "field": "description",
+    "comparator": "contains",
+    "value": "U RENT IT"
+   },
+   {
+    "criteria_id": "1635470000001725915",
+    "field": "description",
+    "comparator": "contains",
+    "value": "FLOOR AND DECOR"
+   },
+   {
+    "criteria_id": "1635470000001725916",
+    "field": "description",
+    "comparator": "contains",
+    "value": "MINUTEKEY"
+   },
+   {
+    "criteria_id": "1635470000001725917",
+    "field": "description",
+    "comparator": "contains",
+    "value": "DAMDILL SERVICE"
+   },
+   {
+    "criteria_id": "1635470000001725918",
+    "field": "description",
+    "comparator": "contains",
+    "value": "GENERAL GLASS"
+   }
+  ],
+  "record_as": "expense_refund",
+  "account_id": "1635470000000000457",
+  "account_name": "Repairs & Maintenance - Owner Direct",
+  "tax_id": "",
+  "tax_name": "",
+  "tax_percentage": 0,
+  "customer_id": "",
+  "customer_name": "",
+  "vendor_country_code": "",
+  "reference_number": "from_statement",
+  "payment_mode": "Cash",
+  "tags": []
+ }
+}

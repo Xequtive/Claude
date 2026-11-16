@@ -15,3 +15,7 @@
 {"step": "categorize_transfer", "boa_row": "1635470000000150053", "amount": 30000.0, "new_txn": "1635470000002079029", "code": 0}
 {"step": "match", "feed_row": "1635470000000153029", "feed_account": "1635470000000150968", "matched_to": "1635470000002079029", "type": "transfer_fund", "code": 0, "msg": "The transaction(s) has been matched."}
 {"step": "note", "text": "Amex had two identical 30,000 rows (153029 original id range, 1759483 later-range duplicate). Matched 153029; 1759483 left uncategorized."}
+{"step": "match", "feed_row": "1635470000000370398", "feed_account": "1635470000000150096", "matched_to": "1635470000002077893", "type": "card_payment", "code": 0, "msg": "The transaction(s) has been matched."}
+{"step": "match", "feed_row": "1635470000000370420", "feed_account": "1635470000000150096", "matched_to": "1635470000002077882", "type": "card_payment", "code": 0, "msg": "The transaction(s) has been matched."}
+{"step": "match", "feed_row": "1635470000000370432", "feed_account": "1635470000000150096", "matched_to": "1635470000002077871", "type": "card_payment", "code": 0, "msg": "The transaction(s) has been matched."}
+{"step": "match", "feed_row": "1635470000000370470", "feed_account": "1635470000000150096", "matched_to": "1635470000002077860", "type": "card_payment", "code": 0, "msg": "The transaction(s) has been matched."}
