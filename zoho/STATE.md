@@ -34,11 +34,28 @@ No secrets in this file.
 - 2026-11-16: reconciled 2026-01-17..2026-02-16 (open 0.00, close 47.00) and 2026-02-17..2026-03-16 (open 47.00, close 0.00),
   both tied to printed statements 26.02 and 26.03. Total now 93. Last reconciled period ends 2026-03-16.
 - There is no statement for 2025-12-17..2026-01-16 (no activity, none issued); it was skipped, start_date = statement start worked.
-- NEXT: statements 26.04 .. 26.09 exist in WorkDrive but cannot be reconciled until 8 uncategorized lines are resolved:
-  2026-04-08 credit 8,000 "DIRECT DEPOSIT CAPITAL ONE", 2026-04-09 credit 30,000 "BALANCE TRANSFER AMERICAN EXP",
-  and debits 2026-06-04 500, 07-03 499, 08-03 490, 09-03 489, 10-03 484, 11-03 476 ("ONLINE/MOBILE ..." payments).
-  These are transfers between own accounts: match against the Amex Platinum / CapOne / checking registers, do NOT book as expenses.
-  Their net (35,062.00) is exactly the gap between books (360.99) and bank (35,422.99).
+- 2026-11-16 (later): the 8 uncategorized lines are DONE. $8,000 = transfer BofA card -> CapOne 360 (matched to CapOne feed row 04-08);
+  $30,000 = transfer BofA card -> Amex Platinum (matched to the Amex 04-10 "ELECTRONIC PAYMENT RECEIVED" row);
+  six payments (500/499/490/489/484/476) = card_payment CapOne 360 -> BofA card, each matched to the CapOne "BANK OF AMERICA" withdrawal
+  1-3 days later. BofA card: 0 uncategorized, books 35,422.99 = bank 35,422.99. Manifest: zoho/manifests/2026-11-16_boa_cc_categorize_match.jsonl.
+- Interest/fees are ALREADY booked on the card, split in two rows per cycle (INTEREST CHARGED ON BALANCE TRANSFERS + ...ON DIR DEP&CHK CASHADV);
+  they sum exactly to each statement's "Interest Charged" (34.11, 124.74, 127.40, 121.98, 124.81, 123.58; Oct 118.37 has no statement in WorkDrive yet).
+- NEXT: reconcile statements 26.04..26.09 (all tie to Zoho). Closings: 26.04 (03-17..04-16) 38,034.11; 26.05 (04-17..05-16) 37,744.85;
+  26.06 (05-17..06-16) 37,372.25; 26.07 (06-17..07-16) 36,995.23; 26.08 (07-17..08-16) 36,630.04; 26.09 (08-17..09-16) 36,264.62.
+  Reconcile one, read back, then continue. Statement 26.10/26.11 not in WorkDrive yet (Oct interest 118.37, payments 484 and 476 are booked).
+- Follow-up: earlier card_payment rows on the card (94.99 on 01-31, 150.10 on 04-03, 47.00 on 03-13, 414.00 on 05-13) may still have
+  unmatched CapOne 360 feed rows (CapOne 04-06 150.10 "BK OF AMER VISA ONLINE PMT" is uncategorized). Check and match the same way.
+- Flag: Amex Platinum has duplicate feed rows (44 identical-row groups among uncategorized since 03-30; the later id range 1759xxx looks like a re-import).
+  Nothing deleted. Matched the original-range row for the 30,000; duplicate 1635470000001759483 left uncategorized, do not Quick-Categorize it.
+- Flag: CapOne 360 Checking books balance is -654,363.79 vs bank 20,235.79 (1,585 uncategorized lines).
+
+## Categorize / match payloads confirmed live (2026-11-16)
+- Transfer: `POST /banktransactions/uncategorized/{feed_row}/categorize?account_id=<register of that row>`
+  `{"transaction_type":"transfer_fund","from_account_id":<paying register>,"to_account_id":<receiving register>,"amount":<abs>,"date":"YYYY-MM-DD"}`
+- Card payment (feed row on the card): same URL, `{"transaction_type":"card_payment","from_account_id":<bank>,"to_account_id":<card>,...}`.
+- Match the OTHER register's feed row to the new transaction: `GET .../uncategorized/{feed_row}/match?account_id=<its register>` lists candidates
+  (assert the new transaction_id is offered; ignore is_best_match), then
+  `POST` same URL `{"transactions_to_be_matched":[{"transaction_id":<new id>,"transaction_type":"transfer_fund"|"card_payment"}]}`.
 
 ## Census (2026-11-16): 6,585 uncategorized lines across accounts
 CapOne 360 Checking 1592, Merrill CMA 1253, Chase OVO Checking 905, Amex Platinum 814, CapOne Manolo Checking 557,
