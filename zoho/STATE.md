@@ -70,6 +70,16 @@ Chase OVO CC 315, BofA Checking 171, RJ Brokerage 171. Only the BofA card has an
   auto_categorize, reference_number). Always read back and compare. Max 10 criteria per rule. Rules only act on newly imported rows, not existing uncategorized.
 - Open: HOMEAWAY is in both Other Travel Expenses 2 and Hotel and Lodging 3.
 
+## Full rules review (2026-11-16, all 275 rules, read-only)
+- Clean: no direction/type errors, no rule over 10 criteria, all 59 target accounts active (chartofaccounts/{id} check; listing the COA with a filter misses accounts, don't trust it).
+- 253 autocategorize, 22 recognize. 20 of the 22 are transfer/card_payment rules: leave on recognize (they can auto-type a transfer without the other side's mirror row).
+  Candidates to flip: 'Rent Expense - Left Bank 1' (9/9 history agree) and 'STATEMENT CREDIT 1' (record_as refund -> Rewards & Reimbursements).
+- Dead/shadowed keywords (harmless cleanup): Dining 'USA*CANTEEN' and 'CANTEENSANANTONIO' lose to Convenience Stores 1 'CANTEEN' (39 vending rows all went to Convenience);
+  Other Travel Expenses 2 'HOMEAWAY' loses to Hotel and Lodging 3; Hotel 'OMNI' shadows Dining 'OWNERS BOX OMNI DCCH'; Dept 19 'PROFOUND NATURALS' shadows Personal Care 6 'SQ *PROFOUND NATURALS' (no real rows in the last year).
+- Minor: 'Department & Online Shopping REFUND 4' took 1 Amazon Prime refund that history booked to Software. Duplicate keywords (case variants) in Video Games REFUND 1 and Rideshare REFUND 1.
+- 95 of 275 rules had no hit in the last year. Rules are not retroactive: ~506 of 1,736 uncategorized rows (14 crawled registers, last year) match an auto rule but stay uncategorized
+  (Amex Platinum 333, Chase OVO CC 131). Categorizing them needs a per-row API lane with a plan table first.
+
 ## Working rules (from the master file, short form)
 Show a plan table before writes; nothing posts to the ledger (journals, categorize-as-transfer, invoice fills) without an in-chat OK;
 never create/modify/delete bank feed rows; union census (categorized + matched + uncategorized) before any absence claim;
