@@ -1,0 +1,6 @@
+{"statement": "26.04", "period": "2026-03-17..2026-04-16", "rows": 8, "closing": "38034.11", "code": 0, "status": "reconciled", "reconciliation_id": "1635470000001787192"}
+{"statement": "26.05", "period": "2026-04-17..2026-05-16", "rows": 3, "closing": "37744.85", "code": 0, "status": "reconciled", "reconciliation_id": "1635470000001720840"}
+{"statement": "26.06", "period": "2026-05-17..2026-06-16", "rows": 3, "closing": "37372.25", "code": 0, "status": "reconciled", "reconciliation_id": "1635470000002078035"}
+{"statement": "26.07", "period": "2026-06-17..2026-07-16", "rows": 3, "closing": "36995.23", "code": 0, "status": "reconciled", "reconciliation_id": "1635470000001701900"}
+{"statement": "26.08", "period": "2026-07-17..2026-08-16", "rows": 3, "closing": "36630.04", "code": 0, "status": "reconciled", "reconciliation_id": "1635470000001718906"}
+{"statement": "26.09", "period": "2026-08-17..2026-09-16", "rows": 3, "closing": "36264.62", "code": 0, "status": "reconciled", "reconciliation_id": "1635470000002079052"}

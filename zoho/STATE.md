@@ -40,11 +40,12 @@ No secrets in this file.
   1-3 days later. BofA card: 0 uncategorized, books 35,422.99 = bank 35,422.99. Manifest: zoho/manifests/2026-11-16_boa_cc_categorize_match.jsonl.
 - Interest/fees are ALREADY booked on the card, split in two rows per cycle (INTEREST CHARGED ON BALANCE TRANSFERS + ...ON DIR DEP&CHK CASHADV);
   they sum exactly to each statement's "Interest Charged" (34.11, 124.74, 127.40, 121.98, 124.81, 123.58; Oct 118.37 has no statement in WorkDrive yet).
-- NEXT: reconcile statements 26.04..26.09 (all tie to Zoho). Closings: 26.04 (03-17..04-16) 38,034.11; 26.05 (04-17..05-16) 37,744.85;
-  26.06 (05-17..06-16) 37,372.25; 26.07 (06-17..07-16) 36,995.23; 26.08 (07-17..08-16) 36,630.04; 26.09 (08-17..09-16) 36,264.62.
-  Reconcile one, read back, then continue. Statement 26.10/26.11 not in WorkDrive yet (Oct interest 118.37, payments 484 and 476 are booked).
-- Follow-up: earlier card_payment rows on the card (94.99 on 01-31, 150.10 on 04-03, 47.00 on 03-13, 414.00 on 05-13) may still have
-  unmatched CapOne 360 feed rows (CapOne 04-06 150.10 "BK OF AMER VISA ONLINE PMT" is uncategorized). Check and match the same way.
+- DONE 2026-11-16: reconciled statements 26.04..26.09 (periods 03-17..09-16), each tied to the printed closing before posting
+  (38,034.11 / 37,744.85 / 37,372.25 / 36,995.23 / 36,630.04 / 36,264.62). History is now 99 reconciliations; last reconciled period ends 2026-09-16.
+  Manifest: zoho/manifests/2026-11-16_boa_cc_reconciliations_2.jsonl. Script pattern: pull union census, assert opening + net == printed closing, POST, read back.
+- NEXT: statements 26.10 (09-17..10-16) and 26.11 (10-17..11-16) are not in the WorkDrive B050 folder yet. Booked and waiting: Oct interest 118.37 (18.09 + 100.28),
+  payments 484 (10-03) and 476 (11-03). Expected closings if the books are right: 36,264.62 + 118.37 - 484 = 35,898.99 (26.10); then 35,898.99 - 476 + Nov interest = 26.11.
+- DONE: the four older card_payment rows (94.99, 47.00, 150.10, 414.00) are matched to their CapOne 360 feed rows.
 - Flag: Amex Platinum has duplicate feed rows (44 identical-row groups among uncategorized since 03-30; the later id range 1759xxx looks like a re-import).
   Nothing deleted. Matched the original-range row for the 30,000; duplicate 1635470000001759483 left uncategorized, do not Quick-Categorize it.
 - Flag: CapOne 360 Checking books balance is -654,363.79 vs bank 20,235.79 (1,585 uncategorized lines).
