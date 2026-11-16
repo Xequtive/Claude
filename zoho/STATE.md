@@ -47,7 +47,10 @@ No secrets in this file.
   Manifest: zoho/manifests/2026-11-16_boa_cc_reconciliations_2.jsonl. Script pattern: pull union census, assert opening + net == printed closing, POST, read back.
 - DONE 2026-11-16: reconciled statement 2026-10 (09-17..10-16), printed closing 35,898.99 (opening 36,264.62; rows: payment 484.00 on 10-03, interest 100.28 + 18.09 on 10-16).
   reconciliation_id 1635470000001943031. History is now 100 reconciliations; last reconciled period ends 2026-10-16. Manifest: zoho/manifests/2026-11-16_boa_cc_reconciliations_3.jsonl.
-- Flag: reconciliations 26.04..2026-10 have `documents: []` (no statement PDF attached), unlike the 91 created 2026-11-15. Attach lane not yet found.
+- DONE 2026-11-16: statement PDFs attached to the 9 reconciliations that lacked one (period ends 2026-02-16..2026-10-16); all 100 now have exactly 1 document.
+  Attach lane: `POST /bankaccounts/{id}/reconciliations/{rid}/attachment?organization_id=..` multipart/form-data, file field `attachment` (201, code 0).
+  Verify via `GET .../reconciliations/{rid}` -> `reconciliation.documents`. Each PDF was tied (printed Statement Closing Date + New Balance Total) to the reconciliation before attaching.
+  Manifest: zoho/manifests/2026-11-16_boa_cc_recon_attachments.jsonl. For each new month: reconcile, then attach the renamed WorkDrive PDF the same way.
 - NEXT: statement 2026-11 (10-17..11-16) is not in WorkDrive yet (closes today). Booked and waiting: payment 476 (11-03) and Nov interest. Expected: 35,898.99 - 476 + Nov interest.
 - DONE: the four older card_payment rows (94.99, 47.00, 150.10, 414.00) are matched to their CapOne 360 feed rows.
 - Flag: Amex Platinum has duplicate feed rows (44 identical-row groups among uncategorized since 03-30; the later id range 1759xxx looks like a re-import).
