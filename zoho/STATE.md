@@ -10,8 +10,10 @@ No secrets in this file.
   READ IT before any write. Fetch with the WorkDrive MCP `Download_Server_File` (base64 in `.data.content`).
 - Yesterday's task logs (json) and rules workbooks are in the same folder (e.g.
   `categorize-2019-boa-transactions-in-zoho-books-20261115.json`, `Zoho_Books_Transaction_Rules_Consolidated_10per.xlsx`).
-- BofA card statements: folder id p8q2y9ffa7ae6eb064a658b4e5ada0e04f054, files `B050 - YY.MM Statement.pdf`
-  (YY.MM = month of the closing date, closes on the 16th). Older `eStmt_*` PDFs are in folder p8q2y46d52cdbf96d4c95999fe990810d46b9.
+- BofA card statements: folder id p8q2y9ffa7ae6eb064a658b4e5ada0e04f054, files `BofA Credit Card - YYYY-MM Statement.pdf`
+  (YYYY-MM = month of the closing date, closes on the 16th). Renamed 2026-11-16 from the old BC-code names `B050 - YY.MM Statement.pdf`
+  (no more BC codes in file names). New downloads arrive as `eStmt_YYYY-MM-DD.pdf`: rename to the same pattern. Older `eStmt_*` PDFs are in folder p8q2y46d52cdbf96d4c95999fe990810d46b9.
+  WorkDrive MCP responses are ~10K tokens per call: for bulk renames use sub-agents. Rename = Update_Files_Folders with body {"data":{"type":"files","attributes":{"name":...}}}.
 - Search tip: WorkDrive search results are huge; they get saved to a file. Use jq on the saved file.
 
 ## Credentials
@@ -43,8 +45,10 @@ No secrets in this file.
 - DONE 2026-11-16: reconciled statements 26.04..26.09 (periods 03-17..09-16), each tied to the printed closing before posting
   (38,034.11 / 37,744.85 / 37,372.25 / 36,995.23 / 36,630.04 / 36,264.62). History is now 99 reconciliations; last reconciled period ends 2026-09-16.
   Manifest: zoho/manifests/2026-11-16_boa_cc_reconciliations_2.jsonl. Script pattern: pull union census, assert opening + net == printed closing, POST, read back.
-- NEXT: statements 26.10 (09-17..10-16) and 26.11 (10-17..11-16) are not in the WorkDrive B050 folder yet. Booked and waiting: Oct interest 118.37 (18.09 + 100.28),
-  payments 484 (10-03) and 476 (11-03). Expected closings if the books are right: 36,264.62 + 118.37 - 484 = 35,898.99 (26.10); then 35,898.99 - 476 + Nov interest = 26.11.
+- DONE 2026-11-16: reconciled statement 2026-10 (09-17..10-16), printed closing 35,898.99 (opening 36,264.62; rows: payment 484.00 on 10-03, interest 100.28 + 18.09 on 10-16).
+  reconciliation_id 1635470000001943031. History is now 100 reconciliations; last reconciled period ends 2026-10-16. Manifest: zoho/manifests/2026-11-16_boa_cc_reconciliations_3.jsonl.
+- Flag: reconciliations 26.04..2026-10 have `documents: []` (no statement PDF attached), unlike the 91 created 2026-11-15. Attach lane not yet found.
+- NEXT: statement 2026-11 (10-17..11-16) is not in WorkDrive yet (closes today). Booked and waiting: payment 476 (11-03) and Nov interest. Expected: 35,898.99 - 476 + Nov interest.
 - DONE: the four older card_payment rows (94.99, 47.00, 150.10, 414.00) are matched to their CapOne 360 feed rows.
 - Flag: Amex Platinum has duplicate feed rows (44 identical-row groups among uncategorized since 03-30; the later id range 1759xxx looks like a re-import).
   Nothing deleted. Matched the original-range row for the 30,000; duplicate 1635470000001759483 left uncategorized, do not Quick-Categorize it.
