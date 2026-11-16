@@ -1,0 +1,3 @@
+{"rule": "Rideshare & Rental Vehicles 2", "rule_id": "1635470000000777340", "removed": ["UBER"], "added": ["UBER TRIP", "UBER *TRIP", "UBER ONE"], "put_code": 0, "verified": true}
+{"rule": "How 2 Be Whole (H2BW) - Expenses 2", "rule_id": "1635470000000806224", "removed": ["PATREON"], "added": [], "put_code": 0, "verified": true}
+{"rule": "Spirits & Nightlife 1", "rule_id": "1635470000000786097", "removed": ["Jethro's Cockta"], "added": [], "put_code": 0, "verified": true}

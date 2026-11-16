@@ -61,6 +61,15 @@ No secrets in this file.
 CapOne 360 Checking 1592, Merrill CMA 1253, Chase OVO Checking 905, Amex Platinum 814, CapOne Manolo Checking 557,
 Chase OVO CC 315, BofA Checking 171, RJ Brokerage 171. Only the BofA card has any reconciliations so far.
 
+## Bank rules (2026-11-16)
+- 275 rules live. Reviewed 76 named rules against a year of real rows: 72 were already autocategorize; flipped the 4 refund rules
+  (Postage / H2BW Expenses / Internet-Cable / Repairs & Maintenance REFUND 1) from recognize to autocategorize, read back, backups in zoho/manifests/.
+- Keyword fixes applied: Rideshare & Rental Vehicles 2 (UBER -> UBER TRIP, UBER *TRIP, UBER ONE; UBER matched Uber Eats and KUBERA.COM),
+  H2BW Expenses 2 (removed PATREON), Spirits & Nightlife 1 (removed Jethro's Cockta). Backups: zoho/manifests/2026-11-16_rules_pre_*_backup.json.
+- Rule PUT works with a full body (rule_name, rule_category, apply_to, criteria_type, criterion[{field,comparator,value}], record_as, account_id,
+  auto_categorize, reference_number). Always read back and compare. Max 10 criteria per rule. Rules only act on newly imported rows, not existing uncategorized.
+- Open: HOMEAWAY is in both Other Travel Expenses 2 and Hotel and Lodging 3.
+
 ## Working rules (from the master file, short form)
 Show a plan table before writes; nothing posts to the ledger (journals, categorize-as-transfer, invoice fills) without an in-chat OK;
 never create/modify/delete bank feed rows; union census (categorized + matched + uncategorized) before any absence claim;

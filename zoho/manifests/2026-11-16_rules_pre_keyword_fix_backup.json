@@ -1,0 +1,236 @@
+{
+ "Rideshare & Rental Vehicles 2": {
+  "rule_id": "1635470000000777340",
+  "rule_name": "Rideshare & Rental Vehicles 2",
+  "target_accounts": [],
+  "accounts": [],
+  "target_accounts_count": -1,
+  "rule_order": 49,
+  "rule_category": "all_accounts",
+  "apply_to": "withdrawals",
+  "criteria_type": "or",
+  "auto_categorize": "autocategorize",
+  "branch_id": "1635470000000095051",
+  "branch_name": "Head Office",
+  "location_id": "1635470000000095051",
+  "location_name": "Head Office",
+  "criterion": [
+   {
+    "criteria_id": "1635470000001706832",
+    "field": "description",
+    "comparator": "contains",
+    "value": "PRICELN*DOLLAR RENT A"
+   },
+   {
+    "criteria_id": "1635470000001706833",
+    "field": "description",
+    "comparator": "contains",
+    "value": "Redcoach"
+   },
+   {
+    "criteria_id": "1635470000001706834",
+    "field": "description",
+    "comparator": "contains",
+    "value": "RENT A CAR"
+   },
+   {
+    "criteria_id": "1635470000001706835",
+    "field": "description",
+    "comparator": "contains",
+    "value": "Rent-a-car"
+   },
+   {
+    "criteria_id": "1635470000001706836",
+    "field": "description",
+    "comparator": "contains",
+    "value": "SIXT.COM"
+   },
+   {
+    "criteria_id": "1635470000001706837",
+    "field": "description",
+    "comparator": "contains",
+    "value": "Thrifty"
+   },
+   {
+    "criteria_id": "1635470000001706838",
+    "field": "description",
+    "comparator": "contains",
+    "value": "UBER"
+   },
+   {
+    "criteria_id": "1635470000001706839",
+    "field": "description",
+    "comparator": "contains",
+    "value": "VONLANE"
+   }
+  ],
+  "record_as": "expense",
+  "account_id": "1635470000000329293",
+  "account_name": "Rideshare & Rental Vehicles",
+  "tax_id": "",
+  "tax_name": "",
+  "tax_percentage": 0,
+  "customer_id": "",
+  "customer_name": "",
+  "vendor_country_code": "",
+  "reference_number": "from_statement",
+  "payment_mode": "",
+  "tags": []
+ },
+ "How 2 Be Whole (H2BW) - Expenses 2": {
+  "rule_id": "1635470000000806224",
+  "rule_name": "How 2 Be Whole (H2BW) - Expenses 2",
+  "target_accounts": [],
+  "accounts": [],
+  "target_accounts_count": -1,
+  "rule_order": 171,
+  "rule_category": "all_accounts",
+  "apply_to": "withdrawals",
+  "criteria_type": "or",
+  "auto_categorize": "autocategorize",
+  "branch_id": "1635470000000095051",
+  "branch_name": "Head Office",
+  "location_id": "1635470000000095051",
+  "location_name": "Head Office",
+  "criterion": [
+   {
+    "criteria_id": "1635470000001948010",
+    "field": "description",
+    "comparator": "contains",
+    "value": "SCIENCE OF SELF"
+   },
+   {
+    "criteria_id": "1635470000001948011",
+    "field": "description",
+    "comparator": "contains",
+    "value": "SP THE EASTERN PHILO"
+   },
+   {
+    "criteria_id": "1635470000001948012",
+    "field": "description",
+    "comparator": "contains",
+    "value": "THE NOMADIC WIFE"
+   },
+   {
+    "criteria_id": "1635470000001948013",
+    "field": "description",
+    "comparator": "contains",
+    "value": "THREE JEWELS"
+   },
+   {
+    "criteria_id": "1635470000001948014",
+    "field": "description",
+    "comparator": "contains",
+    "value": "THREEJEWELS"
+   },
+   {
+    "criteria_id": "1635470000001948015",
+    "field": "description",
+    "comparator": "contains",
+    "value": "THRIVEEARS"
+   },
+   {
+    "criteria_id": "1635470000001948016",
+    "field": "description",
+    "comparator": "contains",
+    "value": "VIEHEALINGI"
+   },
+   {
+    "criteria_id": "1635470000001948017",
+    "field": "description",
+    "comparator": "contains",
+    "value": "PATREON"
+   }
+  ],
+  "record_as": "expense",
+  "account_id": "1635470000000370572",
+  "account_name": "How 2 Be Whole (H2BW) - Expenses",
+  "tax_id": "",
+  "tax_name": "",
+  "tax_percentage": 0,
+  "customer_id": "",
+  "customer_name": "",
+  "vendor_country_code": "",
+  "reference_number": "from_statement",
+  "payment_mode": "",
+  "tags": []
+ },
+ "Spirits & Nightlife 1": {
+  "rule_id": "1635470000000786097",
+  "rule_name": "Spirits & Nightlife 1",
+  "target_accounts": [],
+  "accounts": [],
+  "target_accounts_count": -1,
+  "rule_order": 78,
+  "rule_category": "all_accounts",
+  "apply_to": "withdrawals",
+  "criteria_type": "or",
+  "auto_categorize": "autocategorize",
+  "branch_id": "1635470000000095051",
+  "branch_name": "Head Office",
+  "location_id": "1635470000000095051",
+  "location_name": "Head Office",
+  "criterion": [
+   {
+    "criteria_id": "1635470000001783329",
+    "field": "description",
+    "comparator": "contains",
+    "value": "HOOKAH"
+   },
+   {
+    "criteria_id": "1635470000001783330",
+    "field": "description",
+    "comparator": "contains",
+    "value": "Jethro's Cockta"
+   },
+   {
+    "criteria_id": "1635470000001783331",
+    "field": "description",
+    "comparator": "contains",
+    "value": "Kirby Ice House"
+   },
+   {
+    "criteria_id": "1635470000001783332",
+    "field": "description",
+    "comparator": "contains",
+    "value": "LINCOLN TUNNEL BAR"
+   },
+   {
+    "criteria_id": "1635470000001783333",
+    "field": "description",
+    "comparator": "contains",
+    "value": "poitin Bar"
+   },
+   {
+    "criteria_id": "1635470000001783334",
+    "field": "description",
+    "comparator": "contains",
+    "value": "SIDECAR SOCIAL"
+   },
+   {
+    "criteria_id": "1635470000001783335",
+    "field": "description",
+    "comparator": "contains",
+    "value": "TOPSIDER LOUNGE"
+   },
+   {
+    "criteria_id": "1635470000001783336",
+    "field": "description",
+    "comparator": "contains",
+    "value": "WOB TOWNE"
+   }
+  ],
+  "record_as": "expense",
+  "account_id": "1635470000000787130",
+  "account_name": "Spirits & Nightlife",
+  "tax_id": "",
+  "tax_name": "",
+  "tax_percentage": 0,
+  "customer_id": "",
+  "customer_name": "",
+  "vendor_country_code": "",
+  "reference_number": "from_statement",
+  "payment_mode": "",
+  "tags": []
+ }
+}
