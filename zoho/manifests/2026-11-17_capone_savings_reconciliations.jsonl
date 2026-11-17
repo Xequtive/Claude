@@ -1,0 +1,7 @@
+{"acct": "360 Perf Savings", "stmt": "19.10", "period": "2019-10-01..2019-10-31", "rows": 3, "closing": "168692.20", "code": 0, "message": "The account has been reconciled."}
+{"acct": "360 Perf Savings", "stmt": "19.11", "period": "2019-11-01..2019-11-30", "rows": 2, "closing": "168951.24", "code": 0, "message": "The account has been reconciled."}
+{"acct": "360 Perf Savings", "stmt": "19.12", "period": "2019-12-01..2019-12-31", "rows": 1, "closing": "169198.76", "code": 0, "message": "The account has been reconciled."}
+{"acct": "360 Perf Savings", "stmt": "20.01", "period": "2020-01-01..2020-01-31", "rows": 4, "closing": "27977.16", "code": 0, "message": "The account has been reconciled."}
+{"acct": "360 Perf Savings", "stmt": "20.02", "period": "2020-02-01..2020-02-29", "rows": 1, "closing": "28014.55", "code": 0, "message": "The account has been reconciled."}
+{"acct": "360 Perf Savings", "stmt": "20.03", "period": "2020-03-01..2020-03-31", "rows": 1, "closing": "28051.56", "code": 0, "message": "The account has been reconciled."}
+{"acct": "360 Perf Savings", "stmt": "20.04", "period": "2020-04-01..2020-04-30", "rows": 1, "closing": "28085.82", "code": 0, "message": "The account has been reconciled."}
