@@ -117,3 +117,7 @@ verify by readback, not counts; write a manifest for every write.
 - Driver: zoho/amex_process.py <stmt> (parse+tie, match, auto-categorize charge rows that have an expense rule or are DEBIT ADJUSTMENT twins, hold anything else, reconcile only when clean). Decode downloaded WorkDrive PDFs by content-disposition filename.
 - STOPPED at 24.02: held row VENMO *JORDAN DUELL 41.20 (1/27/24). Other Venmo charges to individuals in the next statements: 15.45, 16.48 (24.06), 51.50 (24.08). Awaiting category decision from user. H-E-B 10.37 (24.09) categorized to Groceries.
 - Statements 24.02..24.09 downloaded and parse-tie clean; the preview shows no other blockers through 24.09.
+
+### Amex progress (2026-11-17, evening)
+- Venmo charges to individuals (4 rows) categorized as transfer_fund Amex -> Friends & Family Transfers (Bank) per user. Reconciled 24.02..24.07 so far (loop for 24.08/24.09 still running when this was written); check zoho/manifests/2026-11-17_amex_reconciliations.jsonl for the latest.
+- All remaining Amex statement PDFs (24.08..26.09 + 2026-10-21) downloaded and tie to printed totals. Preview (zoho/amex_preview.py): through 25.01 clean; 25.02 onward has 260 held rows (card payments, credits like Amazon points / Uber One / digital entertainment / ADJ REDIST PURCHASE BAL, expenses without a rule, and 7 statement lines missing in Books). Awaiting user decisions on payments, credits and missing rows. zoho/amex_process_many.py runs several statements in one pass (loads the register once).
