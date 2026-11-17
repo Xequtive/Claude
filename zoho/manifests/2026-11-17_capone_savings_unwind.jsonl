@@ -1,1 +1,5 @@
 {"acct": "Sophie Savings", "deleted": "1635470000002177331", "period": "2026-09-01..2026-09-30", "before": 57, "after": 56}
+{"acct": "Sophie Savings", "unwound": 23, "remaining": 33, "through": "2024-09-30"}
+{"acct": "Sophie Savings", "step": "uncategorize wrong transfer", "code": 0, "msg": "Transaction(s) have been uncategorized."}
+{"acct": "Sophie Savings", "step": "candidates", "ids": [["1635470000002084817", "transfer_fund", 10.0]]}
+{"acct": "Sophie Savings", "step": "matched to 360 Perf leg", "code": 0, "msg": "The transaction(s) has been matched."}
