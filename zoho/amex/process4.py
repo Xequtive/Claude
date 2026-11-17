@@ -51,7 +51,7 @@ def run_many4(names):
         fuzzy=plan.last_fuzzy; close=d2(sm['closing']); start=(dt.date.fromisoformat(last)+dt.timedelta(days=1)).isoformat()
         todo=[]
         for r,b in sel:
-            if b['_st']=='categorized': continue
+            if b['_st'] in ('categorized','matched'): continue
             desc=b['description'].upper(); rd=b.get('rule_details') or {}; side='charge' if b['debit_or_credit']=='credit' else 'pay'
             base=dict(stmt=n,date=b['date'],amount=str(b['amount']),desc=b['description'][:70],side=side,tid=b['transaction_id'])
             if side=='charge':
@@ -88,7 +88,7 @@ def run_many4(names):
             time.sleep(0.8)
         if todo: reg=load_register()
         sm,tx,sel,missing=plan(n,reg,used)
-        assert not missing and all(b['_st']=='categorized' for r,b in sel),'statement not clean after categorizing'
+        assert not missing and all(b['_st'] in ('categorized','matched') for r,b in sel),'statement not clean after categorizing'
         net=sum((D(r['amt']) for r,b in sel),D(0)); assert sm['Previous Balance']+net==sm['New Balance']
         body={"start_date":start,"end_date":close,"closing_balance":float(sm['New Balance']),"save_option":"reconcile","transactions_to_be_reconciled":[b['transaction_id'] for r,b in sel]}
         res=retry(z.call,'POST',f'bankaccounts/{A}/reconciliations',body=body); rec=res.get('reconciliation') or {}
