@@ -1,3 +1,5 @@
 {"tid": "1635470000000345146", "date": "2023-11-22", "amt": 57.0, "desc": "HUDSONNEWS", "account": "Convenience Stores", "expense_id": "1635470000001784338", "code": 0}
 {"tid": "1635470000000345295", "date": "2023-12-21", "amt": 1197.71, "desc": "DEBIT ADJUSTMENT", "account": "Rewards & Reimbursements", "expense_id": "1635470000001953104", "code": 0}
 {"tid": "1635470000000321107", "date": "2024-01-21", "amt": 80.66, "desc": "DEBIT ADJUSTMENT", "account": "Rewards & Reimbursements", "expense_id": "1635470000002081013", "code": 0}
+{"tid": "1635470000000321079", "date": "2024-01-14", "amt": 500.0, "desc": "Amex Send: Transfer to Card", "type": "transfer_fund", "from": "Friends & Family Transfers (Bank)", "to": "Amex: Platinum", "code": 0}
+{"stmt": "24.09", "tid": "1635470000000359162", "date": "2024-08-24", "amt": 10.37, "desc": "H-E-B PFLUGERVILLE TX", "account": "Groceries (375 prior H-E-B rows all Groceries)", "expense_id": "1635470000001788158", "code": 0}

@@ -111,3 +111,9 @@ verify by readback, not counts; write a manifest for every write.
 - HUDSONNEWS 57.00 (11/22/23) categorized to Convenience Stores (other Hudson airport rows went there).
 - 24.01 NOT yet reconciled: blocked by the $500 'Amex Send: Transfer to Card' (1/14/24, uncategorized, transfer - on hold). Also statement shows Hampton Inn 274.56 on 01/06/24 while Books has it 01/07 (feed date differs by a day): matcher needs +-3 day fallback.
 - The 2025-06..2026-09 months also contain duplicate DEBIT ADJUSTMENT rows (id range 1377xxx vs 354xxx twins) and a few 'manual add from statement' rows.
+
+### Amex progress update (2026-11-17, later)
+- DONE also: 24.01 (closing 1,643.78; the $500 Amex Send transfer -> Friends & Family Transfers (Bank), COA 1635470000001138139, via /categorize transfer_fund from F&F to Amex register, per user). Matcher now has +-3 day fallback (Hampton Inn 01/06 vs 01/07).
+- Driver: zoho/amex_process.py <stmt> (parse+tie, match, auto-categorize charge rows that have an expense rule or are DEBIT ADJUSTMENT twins, hold anything else, reconcile only when clean). Decode downloaded WorkDrive PDFs by content-disposition filename.
+- STOPPED at 24.02: held row VENMO *JORDAN DUELL 41.20 (1/27/24). Other Venmo charges to individuals in the next statements: 15.45, 16.48 (24.06), 51.50 (24.08). Awaiting category decision from user. H-E-B 10.37 (24.09) categorized to Groceries.
+- Statements 24.02..24.09 downloaded and parse-tie clean; the preview shows no other blockers through 24.09.
