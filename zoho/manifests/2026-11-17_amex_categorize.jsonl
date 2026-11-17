@@ -12,3 +12,4 @@
 {"stmt": "24.05", "tid": "1635470000000321683", "date": "2024-05-21", "amt": 71.65, "desc": "DEBIT ADJUSTMENT", "account": "Rewards & Reimbursements (adjustment twin)", "expense_id": "1635470000001945157", "code": 0}
 {"stmt": "24.07", "tid": "1635470000000321970", "date": "2024-07-21", "amt": 163.6, "desc": "DEBIT ADJUSTMENT", "account": "Rewards & Reimbursements (adjustment twin)", "expense_id": "1635470000001955133", "code": 0}
 {"stmt": "24.08", "tid": "1635470000000359138", "date": "2024-08-21", "amt": 202.48, "desc": "DEBIT ADJUSTMENT", "account": "Rewards & Reimbursements (adjustment twin)", "expense_id": "1635470000002081049", "code": 0}
+{"stmt": "24.09", "tid": "1635470000000359306", "date": "2024-09-20", "amt": 89.13, "desc": "DEBIT ADJUSTMENT", "account": "Rewards & Reimbursements (adjustment twin)", "expense_id": "1635470000001706959", "code": 0}

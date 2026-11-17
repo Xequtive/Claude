@@ -7,3 +7,5 @@
 {"statement": "24.05", "period": "2024-04-20..2024-05-21", "rows": 143, "fuzzy": 0, "closing": "1634.73", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000001706956"}
 {"statement": "24.06", "period": "2024-05-22..2024-06-20", "rows": 120, "fuzzy": 0, "closing": "521.94", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000001720843"}
 {"statement": "24.07", "period": "2024-06-21..2024-07-21", "rows": 166, "fuzzy": 0, "closing": "192.16", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000001720846"}
+{"statement": "24.08", "period": "2024-07-22..2024-08-21", "rows": 170, "fuzzy": 0, "closing": "5084.99", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000001927062"}
+{"statement": "24.09", "period": "2024-08-22..2024-09-20", "rows": 168, "fuzzy": 0, "closing": "4341.55", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000001941118"}
