@@ -32,9 +32,27 @@ def _need(name):
     return v
 
 
+_CACHE = os.environ.get("ZOHO_TOKEN_CACHE", "/tmp/zoho_token_cache.json")   # shared by every script on this machine; outside the repo
+
+
+def _read_cache():
+    try:
+        d = json.load(open(_CACHE))
+        if d.get("value") and time.time() < d.get("expires", 0) - 120:
+            return d
+    except Exception:
+        pass
+    return None
+
+
 def access_token():
-    """Return a cached access token, refreshing it from the refresh token when stale."""
+    """Return a cached access token (in-process, then shared on-disk cache), minting a new one only when stale.
+    Zoho rate-limits token minting, so scripts must share one token instead of each asking for their own."""
     if _token["value"] and time.time() < _token["expires"] - 60:
+        return _token["value"]
+    d = _read_cache()
+    if d:
+        _token["value"], _token["expires"] = d["value"], d["expires"]
         return _token["value"]
     data = urllib.parse.urlencode({
         "grant_type": "refresh_token",
@@ -49,6 +67,12 @@ def access_token():
         sys.exit(f"Token refresh failed: {body.get('error', body)}")
     _token["value"] = body["access_token"]
     _token["expires"] = time.time() + int(body.get("expires_in", 3600))
+    try:
+        fd = os.open(_CACHE, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, 0o600)
+        with os.fdopen(fd, "w") as f:
+            json.dump({"value": _token["value"], "expires": _token["expires"]}, f)
+    except Exception:
+        pass
     return _token["value"]
 
 
@@ -66,7 +90,9 @@ def call(method, path, params=None, body=None, _retry=False):
             return json.load(r)
     except urllib.error.HTTPError as e:
         if e.code == 401 and not _retry:
-            _token["value"] = None          # cached token invalidated: mint a fresh one and retry once
+            _token["value"] = None; _token["expires"] = 0.0          # token invalidated: drop caches, mint a fresh one, retry once
+            try: os.remove(_CACHE)
+            except Exception: pass
             return call(method, path, params, body, _retry=True)
         sys.exit(f"{method} {path} -> HTTP {e.code}: {e.read().decode()[:500]}")
 
