@@ -1,8 +1,9 @@
-import sys; sys.path.insert(0,'/tmp/claude-0/amex')
+import os
+from paths import *
 from process3 import *
 PLACE='1635470000001792340'   # Uncategorized Transactions (expense)
-QUEUE='/home/user/claude/zoho/amex_review_queue.jsonl'
-MANI='/home/user/claude/zoho/manifests/2026-11-17_amex_missing_rows_import.jsonl'
+QUEUE=ZOHO+'/amex_review_queue.jsonl'
+MANI=ZOHO+'/manifests/2026-11-17_amex_missing_rows_import.jsonl'
 AMEXRE=re.compile(r'AMEX|AMERICAN EXPRESS')
 def qlog(**k): open(QUEUE,'a').write(json.dumps(k)+'\n')
 _banks={}
@@ -71,11 +72,16 @@ def run_many4(names):
         print(f"== {n}: {start}..{close} rows {len(tx)} fuzzy {len(fuzzy)} to categorize {len(todo)} (flagged {sum(1 for t in todo if t[4])})",flush=True)
         for kind,acct,why,base,flag in todo:
             b=reg[base['tid']]
-            if kind=='exp': res=retry(z.call,'POST',f"banktransactions/uncategorized/{base['tid']}/categorize/expenses",params={'account_id':A},body={"date":b['date'],"amount":float(b['amount']),"account_id":acct,"paid_through_account_id":A})
-            else:
+            try:
+              if kind=='exp': res=retry(z.call,'POST',f"banktransactions/uncategorized/{base['tid']}/categorize/expenses",params={'account_id':A},body={"date":b['date'],"amount":float(b['amount']),"account_id":acct,"paid_through_account_id":A})
+              else:
                 ty={'cardpay':'card_payment','refund':'expense_refund','xfer':'transfer_fund'}[kind]
                 body={"transaction_type":ty,"from_account_id":acct,"to_account_id":A,"amount":float(b['amount']),"date":b['date']}
                 res=retry(z.call,'POST',f"banktransactions/uncategorized/{base['tid']}/categorize",params={'account_id':A},body=body)
+            except SystemExit as e:
+                if '108006' in str(e):
+                    open(MANC,'a').write(json.dumps(dict(base,account=why,kind=kind,code='already-done-skipped'))+'\n'); print('   skip (already categorized by Books):',base['date'],base['amount'],base['desc'][:30],flush=True); continue
+                raise
             open(MANC,'a').write(json.dumps(dict(base,account=why,kind=kind,code=res.get('code')))+'\n')
             assert res.get('code')==0,res
             if flag: qlog(**dict(base,action=why,confidence='<80%',reason=flag))

@@ -1,8 +1,9 @@
-import sys; sys.path.insert(0,'/tmp/claude-0/amex')
+import os
+from paths import *
 from recon_stmt import *
 REW='1635470000000373577'
-MANC='/home/user/claude/zoho/manifests/2026-11-17_amex_categorize.jsonl'
-MANR='/home/user/claude/zoho/manifests/2026-11-17_amex_reconciliations.jsonl'
+MANC=ZOHO+'/manifests/2026-11-17_amex_categorize.jsonl'
+MANR=ZOHO+'/manifests/2026-11-17_amex_reconciliations.jsonl'
 def used_ids():
     recs=retry(z.get,f'bankaccounts/{A}/reconciliations',per_page=200)['reconciliations']
     used=set(); last=None

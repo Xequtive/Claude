@@ -1,5 +1,6 @@
+import os
 import sys, json, re, collections, time, datetime as dt
-sys.path.insert(0,'/tmp/claude-0/amex'); sys.path.insert(0,'/tmp/claude-0/work')
+from paths import *
 from parse_amex import *
 from resave_lib import retry, z
 from decimal import Decimal as D
@@ -18,7 +19,7 @@ def load_register():
         time.sleep(0.5)
     return now
 def plan(n, reg, used):
-    txt=open(f'/tmp/claude-0/amex/s_{n}.txt').read(); tx,sm,by,calc=tie(txt)
+    txt=open(os.path.join(STMT_DIR,f's_{n}.txt')).read(); tx,sm,by,calc=tie(txt)
     assert calc==sm['New Balance'], 'statement parse does not tie'
     pool=collections.defaultdict(list)
     for t in sorted(reg.values(), key=lambda t:t['transaction_id']):

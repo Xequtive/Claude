@@ -1,3 +1,5 @@
+from paths import *
+import os
 import re, sys, json
 from decimal import Decimal as D
 AMT=r'(-?\$[\d,]+\.\d\d)'
@@ -41,7 +43,7 @@ def tie(txt):
     return tx,sm,by,calc
 if __name__=='__main__':
     for n in sys.argv[1:]:
-        txt=open(f'/tmp/claude-0/amex/s_{n}.txt').read()
+        txt=open(os.path.join(STMT_DIR,f's_{n}.txt')).read()
         tx,sm,by,calc=tie(txt)
         print(n,'closing',sm['closing'],'prev',sm['Previous Balance'],'printed new',sm['New Balance'],'| printed pay',sm['Payments/Credits'],'chg',sm['New Charges'],'fees',sm['Fees'],'int',sm['Interest Charged'])
         print('   parsed',{k:str(v) for k,v in by.items()},'rows',len(tx),'| prev+parsed',calc,'TIE' if calc==sm['New Balance'] else 'MISMATCH')

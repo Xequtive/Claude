@@ -1,7 +1,8 @@
-import sys; sys.path.insert(0,'/tmp/claude-0/amex')
+import os
+from paths import *
 from process import *
 import re, collections
-RULES=json.load(open('/home/user/claude/zoho/manifests/2026-11-17_rules_pre_resave_backup.json'))
+RULES=json.load(open(ZOHO+'/manifests/2026-11-17_rules_pre_resave_backup.json'))
 ACCT={d['account_name']:d['account_id'] for d in RULES.values()}
 def mkey(desc):
     toks=re.findall(r'[A-Z]{2,}',desc.upper()); return ' '.join(toks[:2]) if len(toks)>=2 else None
@@ -12,20 +13,24 @@ def build_hist(reg):
             k=mkey(t['description']); 
             if k: h[k][t['offset_account_name']]+=1
     return h
+def keys_of(desc):
+    toks=re.findall(r'[A-Z]{2,}',desc.upper()); out=[]
+    if len(toks)>=2: out.append(' '.join(toks[:2]))
+    if toks and len(toks[0])>=3: out.append('1:'+toks[0])
+    return out
 def build_hist2(reg):
     h=collections.defaultdict(collections.Counter)
     for t in reg.values():
         if t['_st']!='categorized' or not t.get('offset_account_name'): continue
-        k=mkey(t['description'])
-        if not k: continue
         side='charge' if t['debit_or_credit']=='credit' else 'pay'
-        h[(k,side)][(t.get('transaction_type'),t['offset_account_name'])]+=1
+        for k in keys_of(t['description']):
+            h[(k,side)][(t.get('transaction_type'),t['offset_account_name'])]+=1
     return h
 def pick2(h,desc,side):
-    k=mkey(desc)
-    if not k or (k,side) not in h: return None
-    (ty,name),n=h[(k,side)].most_common(1)[0]; tot=sum(h[(k,side)].values())
-    if tot>=3 and n/tot>=0.80 and name in ACCT: return ty,name,ACCT[name],f'{n}/{tot}'
+    for k in keys_of(desc):
+        if (k,side) not in h: continue
+        (ty,name),n=h[(k,side)].most_common(1)[0]; tot=sum(h[(k,side)].values())
+        if tot>=3 and n/tot>=0.80 and name in ACCT: return ty,name,ACCT[name],f'{n}/{tot}'
     return None
 def hist_pick(h,desc):
     k=mkey(desc)
@@ -76,4 +81,3 @@ def run_many(names):
         used|={b['transaction_id'] for r,b in sel}; last=close
 if __name__=='__main__': run_many(sys.argv[1:])
 
-if __name__=='__main__' and len(sys.argv)>1: run_many(sys.argv[1:])
