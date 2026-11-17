@@ -1,0 +1,2 @@
+{"stmt": "25.08", "date": "2025-08-21", "amt": 26.86, "sent_side": "credit", "resp": "Your card statement has been imported.", "code": 0, "landed": [["1635470000002142002", "debit"]]}
+{"stmt": "25.08", "date": "2025-08-21", "amt": 26.86, "note": "first import landed flipped; deleted statement 1635470000002142001; re-imported sending charge as debit", "landed": [["1635470000002144002", "credit"]]}
