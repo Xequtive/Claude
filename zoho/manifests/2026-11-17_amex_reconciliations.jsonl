@@ -34,3 +34,10 @@
 {"statement": "26.08", "period": "2026-07-22..2026-08-21", "rows": 166, "fuzzy": 97, "closing": "10599.52", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002131137"}
 {"statement": "26.09", "period": "2026-08-22..2026-09-20", "rows": 138, "fuzzy": 73, "closing": "6148.91", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002174067"}
 {"statement": "2026-10-21", "period": "2026-09-21..2026-10-21", "rows": 144, "fuzzy": 14, "closing": "8353.36", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002172134"}
+{"statement": "26.04", "period": "2026-03-21..2026-04-20", "rows": 139, "fuzzy": 92, "closing": "655.01", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002161503"}
+{"statement": "26.05", "period": "2026-04-21..2026-05-21", "rows": 173, "fuzzy": 88, "closing": "3331.69", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002178447"}
+{"statement": "26.06", "period": "2026-05-22..2026-06-19", "rows": 135, "fuzzy": 60, "closing": "4668.55", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002165575"}
+{"statement": "26.07", "period": "2026-06-20..2026-07-21", "rows": 184, "fuzzy": 94, "closing": "5564.77", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002179563"}
+{"statement": "26.08", "period": "2026-07-22..2026-08-21", "rows": 166, "fuzzy": 97, "closing": "10599.52", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002162567"}
+{"statement": "26.09", "period": "2026-08-22..2026-09-20", "rows": 138, "fuzzy": 73, "closing": "6148.91", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002159712"}
+{"statement": "2026-10-21", "period": "2026-09-21..2026-10-21", "rows": 144, "fuzzy": 14, "closing": "8353.36", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002166509"}
