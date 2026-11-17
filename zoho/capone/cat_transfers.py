@@ -7,12 +7,22 @@ INCOME='1635470000000369711'   # Uncategorized/No Statement Income (Net)
 plan=json.load(open('/tmp/claude-0/capone/transfer_plan.json'))
 MAN=ZOHO+'/manifests/2026-11-17_capone_savings_categorize.jsonl'; QUEUE=ZOHO+'/capone/review_queue.jsonl'
 probe='--probe' in sys.argv; n=0
+import http.client, urllib.error, os
 def call(m,p,**kw):
-    try: return z.call(m,p,**kw)
-    except SystemExit as e: return {'code':'ERR','message':str(e)[:250]}
+    for i in range(6):
+        try: return z.call(m,p,**kw)
+        except SystemExit as e: return {'code':'ERR','message':str(e)[:250]}
+        except (http.client.HTTPException, urllib.error.URLError, ConnectionError, TimeoutError): time.sleep(3*(i+1))
+    return {'code':'ERR','message':'network retries exhausted'}
+DONE=set()
+if os.path.exists(MAN):
+    for l in open(MAN):
+        x=json.loads(l)
+        if x.get('code') in (0,'skip'): DONE.add(x['tid'])
 for no,rows in plan.items():
     me=OWN[no]
     for tid,date,side,amt,desc,last,cp_tid,cp_st in rows:
+        if tid in DONE: continue
         rec={'acct':no,'tid':tid,'date':date,'side':side,'amount':amt,'desc':desc,'counterpart':last,'cp_tid':cp_tid,'cp_status':cp_st}
         if last in REG and REG[last]!=me:
             other=REG[last]; frm,to=(me,other) if side=='credit' else (other,me)
