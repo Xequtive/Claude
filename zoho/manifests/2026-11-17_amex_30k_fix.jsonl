@@ -1,0 +1,10 @@
+{"unwound": "2026-10-21", "id": "1635470000002172134"}
+{"unwound": "2026-09-20", "id": "1635470000002174067"}
+{"unwound": "2026-08-21", "id": "1635470000002131137"}
+{"unwound": "2026-07-21", "id": "1635470000002179047"}
+{"unwound": "2026-06-19", "id": "1635470000002171055"}
+{"unwound": "2026-05-21", "id": "1635470000002143067"}
+{"unwound": "2026-04-20", "id": "1635470000002167055"}
+{"unwound_total": 7, "remaining": 29}
+{"step": "uncategorize wrong refund copy", "code": 0, "msg": "Transaction(s) have been uncategorized."}
+{"step": "exclude duplicate feed row", "code": 0, "msg": "The transaction(s) have been excluded."}
