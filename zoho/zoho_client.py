@@ -52,7 +52,7 @@ def access_token():
     return _token["value"]
 
 
-def call(method, path, params=None, body=None):
+def call(method, path, params=None, body=None, _retry=False):
     """Call a Books endpoint. organization_id is added automatically."""
     q = {"organization_id": ORG_ID, **(params or {})}
     url = f"{API}/{path.lstrip('/')}?{urllib.parse.urlencode(q)}"
@@ -65,6 +65,9 @@ def call(method, path, params=None, body=None):
         with urllib.request.urlopen(req, timeout=60) as r:
             return json.load(r)
     except urllib.error.HTTPError as e:
+        if e.code == 401 and not _retry:
+            _token["value"] = None          # cached token invalidated: mint a fresh one and retry once
+            return call(method, path, params, body, _retry=True)
         sys.exit(f"{method} {path} -> HTTP {e.code}: {e.read().decode()[:500]}")
 
 

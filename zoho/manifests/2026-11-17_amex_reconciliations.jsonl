@@ -23,3 +23,8 @@
 {"statement": "25.09", "period": "2025-08-22..2025-09-19", "rows": 134, "fuzzy": 0, "closing": "2206.16", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002146030"}
 {"statement": "25.10", "period": "2025-09-20..2025-10-21", "rows": 164, "fuzzy": 0, "closing": "2886.07", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002144022"}
 {"statement": "25.11", "period": "2025-10-22..2025-11-20", "rows": 119, "fuzzy": 32, "closing": "3216.15", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002177031"}
+{"statement": "25.12", "period": "2025-11-21..2025-12-21", "rows": 186, "fuzzy": 110, "closing": "5851.36", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002156058"}
+{"statement": "26.01", "period": "2025-12-22..2026-01-21", "rows": 144, "fuzzy": 81, "closing": "6107.33", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002165049"}
+{"statement": "26.02", "period": "2026-01-22..2026-02-18", "rows": 130, "fuzzy": 83, "closing": "4123.21", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002154037"}
+{"statement": "26.03", "period": "2026-02-19..2026-03-20", "rows": 155, "fuzzy": 96, "closing": "4369.35", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002182001"}
+{"statement": "26.04", "period": "2026-03-21..2026-04-20", "rows": 139, "fuzzy": 91, "closing": "655.01", "code": 0, "message": "The account has been reconciled.", "reconciliation_id": "1635470000002167055"}

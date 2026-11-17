@@ -2,3 +2,6 @@
 {"stmt": "25.08", "date": "2025-08-21", "amt": 26.86, "note": "first import landed flipped; deleted statement 1635470000002142001; re-imported sending charge as debit", "landed": [["1635470000002144002", "credit"]]}
 {"stmt": "25.11", "date": "2025-10-30", "amt": "-723.36", "desc": "ORMAND O NEAL | COSMOPOL-FRONT DESK", "code": 0}
 {"stmt": "25.12", "date": "2025-12-01", "amt": "117.18", "desc": "AMAZON MARKETPLACE NA PA | AMZN.COM/BILL | WA", "code": 0}
+{"stmt": "26.05", "date": "2026-05-12", "amt": "-12.65", "desc": "ORMAND O NEAL | H-E-B #687 000000000096614", "code": 0}
+{"stmt": "26.05", "date": "2026-05-14", "amt": "-31.89", "desc": "ORMAND O NEAL | DISPUTE CREDIT - PIZZA HUT 039288 039288", "code": 0}
+{"stmt": "26.05", "date": "2026-05-12", "amt": "-11.75", "desc": "VICTORIA O NEAL | STARBUCKS 8007827282", "code": 0}

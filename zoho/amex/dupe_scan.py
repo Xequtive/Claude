@@ -27,7 +27,7 @@ for t in reg.values():
     if t['transaction_id'] in recset or t['date']>cut: continue
     for s in rec_by.get(key(t),[]):
         if abs((dt.date.fromisoformat(s['date'])-dt.date.fromisoformat(t['date'])).days)<=3:
-            cands.append({'tid':t['transaction_id'],'status':t['_st'],'date':t['date'],'side':t['debit_or_credit'],'amount':t['amount'],'desc':t['description'][:50],'twin_reconciled':s['transaction_id'],'twin_date':s['date']}); break
+            cands.append({'tid':t['transaction_id'],'status':t['_st'],'date':t['date'],'side':t['debit_or_credit'],'amount':t['amount'],'desc':t['description'][:50],'twin_reconciled':s['transaction_id'],'itid':t.get('imported_transaction_id') or '','twin_date':s['date']}); break
 json.dump(cands,open('/tmp/claude-0/amex/dupe_cands.json','w'),indent=0)
 print(f'reconciliations: {len(recs)} (through {last}); txns in them: {len(recset)}')
 print(f'keys appearing 2+ times inside one reconciliation (legit repeats like 2x$25 airline credits): {inside}')
