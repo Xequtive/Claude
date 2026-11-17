@@ -10,9 +10,14 @@ subprocess.run([sys.executable,os.path.join(HERE,'dupe_scan.py')],check=True)
 cands=json.load(open('/tmp/claude-0/amex/dupe_cands.json'))
 if '--categorized' in sys.argv: cands=[x for x in cands if x['status']!='uncategorized']
 cands=cands[: (1 if probe else lim)]
+import http.client, urllib.error
 def call(m,p,**params):
-    try: return z.call(m,p,params=params)
-    except SystemExit as e: return {'code':'ERR','message':str(e)[:300]}
+    for i in range(5):
+        try: return z.call(m,p,params=params)
+        except SystemExit as e: return {'code':'ERR','message':str(e)[:300]}
+        except (http.client.HTTPException, urllib.error.URLError, ConnectionError, TimeoutError):
+            time.sleep(3*(i+1))
+    return {'code':'ERR','message':'network retries exhausted'}
 for c in cands:
     rec={'tid':c['tid'],'date':c['date'],'amount':c['amount'],'desc':c['desc'],'status':c['status'],'twin':c['twin_reconciled']}
     fid=c['tid']
