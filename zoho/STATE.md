@@ -92,3 +92,11 @@ Chase OVO CC 315, BofA Checking 171, RJ Brokerage 171. Only the BofA card has an
 Show a plan table before writes; nothing posts to the ledger (journals, categorize-as-transfer, invoice fills) without an in-chat OK;
 never create/modify/delete bank feed rows; union census (categorized + matched + uncategorized) before any absence claim;
 verify by readback, not counts; write a manifest for every write.
+
+## Rule sweep behaviour (2026-11-17)
+- Rules fire at import; the catch-up for rows already in the feed starts when a rule is SAVED IN THE UI (user re-saved Airfare 1: 11 old 2025 rows categorized within minutes).
+- API PUT of a rule does NOT start it: unchanged-body PUT (Security Services 1) and recognize->autocategorize->back (Miscellaneous Fees 1) both left rows untouched after 3-8 min. Rule bodies unchanged on readback. Backup: zoho/manifests/2026-11-17_rules_pre_resave_backup.json, log: 2026-11-17_rules_resave.jsonl.
+- API usage is not the limit (X-Rate-Limit 15000/day, ~1.7K used).
+- A categorized row gets a NEW transaction_id (feed id kept in imported_transaction_id): never infer "was it retro-applied" from id order.
+- Amex Platinum: 811 -> 800 uncategorized. 515 stuck rows match autocategorize rules: 329 are twins of already-categorized rows (re-import dupes, do not categorize), 186 real. List: zoho/amex_stuck_rules_2026-11-17.md.
+- Open: categorizing the 186 real rows needs either UI re-saves of the 'real-only' rules or a per-row API lane with a plan table. Other registers not yet analysed for twins.
