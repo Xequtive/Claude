@@ -125,3 +125,27 @@
 {"acct": "Sophie Savings", "stmt": "24.07", "period": "2024-07-01..2024-07-31", "rows": 1, "closing": "73.87", "code": 0, "message": "The account has been reconciled."}
 {"acct": "Sophie Savings", "stmt": "24.08", "period": "2024-08-01..2024-08-31", "rows": 1, "closing": "74.02", "code": 0, "message": "The account has been reconciled."}
 {"acct": "Sophie Savings", "stmt": "24.09", "period": "2024-09-01..2024-09-30", "rows": 1, "closing": "74.17", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Manolo Savings", "stmt": "22.12", "period": "2022-12-01..2022-12-31", "rows": 2, "closing": "0.37", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Manolo Savings", "stmt": "23.01", "period": "2023-01-01..2023-01-31", "rows": 0, "closing": "0.37", "code": "ERR", "message": "POST bankaccounts/1635470000000150117/reconciliations -> HTTP 404: {\"code\":1002,\"message\":\"Resource does not exist.\"}"}
+{"acct": "Sophie Savings", "stmt": "24.10", "period": "2024-10-01..2024-10-31", "rows": 2, "closing": "84.34", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "24.11", "period": "2024-11-01..2024-11-30", "rows": 1, "closing": "84.51", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "24.12", "period": "2024-12-01..2024-12-31", "rows": 1, "closing": "84.69", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.01", "period": "2025-01-01..2025-01-31", "rows": 1, "closing": "84.87", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.02", "period": "2025-02-01..2025-02-28", "rows": 1, "closing": "85.03", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.03", "period": "2025-03-01..2025-03-31", "rows": 1, "closing": "85.21", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.04", "period": "2025-04-01..2025-04-30", "rows": 1, "closing": "85.38", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.05", "period": "2025-05-01..2025-05-31", "rows": 1, "closing": "85.56", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.06", "period": "2025-06-01..2025-06-30", "rows": 1, "closing": "85.73", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.07", "period": "2025-07-01..2025-07-31", "rows": 1, "closing": "85.91", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.08", "period": "2025-08-01..2025-08-31", "rows": 1, "closing": "86.09", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.09", "period": "2025-09-01..2025-09-30", "rows": 1, "closing": "86.26", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.10", "period": "2025-10-01..2025-10-31", "rows": 1, "closing": "86.44", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.11", "period": "2025-11-01..2025-11-30", "rows": 1, "closing": "86.62", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "25.12", "period": "2025-12-01..2025-12-31", "rows": 1, "closing": "86.80", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "26.01", "period": "2026-01-01..2026-01-31", "rows": 1, "closing": "86.98", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "26.02", "period": "2026-02-01..2026-02-28", "rows": 1, "closing": "87.14", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "26.03", "period": "2026-03-01..2026-03-31", "rows": 1, "closing": "87.32", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "26.04", "period": "2026-04-01..2026-04-30", "rows": 1, "closing": "87.50", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "26.05", "period": "2026-05-01..2026-05-31", "rows": 1, "closing": "87.68", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Sophie Savings", "stmt": "26.06", "period": "2026-06-01..2026-06-30", "rows": 1, "closing": "87.86", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Manolo Savings", "note": "ghost reconciliation 2023-01 (id 1635470000002142395, unreadable) from failed POST: delete attempted", "remaining": 13}

@@ -29,7 +29,9 @@ def load():
 recs=sorted(retry(z.get,f'bankaccounts/{AID}/reconciliations',per_page=200)['reconciliations'],key=lambda r:r['end_date'])
 used=set(); last_end=None
 for r in recs:
-    d=retry(z.get,f"bankaccounts/{AID}/reconciliations/{r['reconciliation_id']}")['reconciliation']; used|={t['transaction_id'] for t in d.get('transactions',[])}; last_end=r['end_date']; time.sleep(0.5)
+    try: d=retry(z.get,f"bankaccounts/{AID}/reconciliations/{r['reconciliation_id']}")['reconciliation']; used|={t['transaction_id'] for t in d.get('transactions',[])}
+    except SystemExit: print('   (skipping unreadable empty reconciliation shell',r['reconciliation_id'],r['end_date'],')')
+    last_end=r['end_date']; time.sleep(0.5)
 reg=load()
 def days(a,b): return abs((dt.date.fromisoformat(a)-dt.date.fromisoformat(b)).days)
 IN='debit'; OUT='credit'
@@ -56,6 +58,8 @@ for i,k in enumerate(keys):
         if hit: pool[(side,abs(float(x['amt'])))].remove(hit); sel.append(hit)
         else: missing.append(x)
     sel+= gap_rows
+    if not sel and not missing and s['opening']==s['closing']:
+        print(f"{k} {start}..{send}: no activity (balance {s['closing']}) - nothing to reconcile, folded into the next period",flush=True); continue
     unc=[t for t in sel if t['_st']=='uncategorized']
     net=sum(((D(str(t['amount'])) if t['debit_or_credit']==IN else -D(str(t['amount']))) for t in sel),D(0))
     opening=prev_close if prev_close is not None else s['opening']
@@ -67,9 +71,22 @@ for i,k in enumerate(keys):
         break
     if dry: break
     body={"start_date":start,"end_date":send,"closing_balance":float(s['closing']),"save_option":"reconcile","transactions_to_be_reconciled":[t['transaction_id'] for t in sel]}
-    try: res=z.call('POST',f'bankaccounts/{AID}/reconciliations',body=body)
-    except SystemExit as e: res={'code':'ERR','message':str(e)[:300]}
+    import http.client, urllib.error
+    res=None
+    for attempt in range(4):
+        try: res=z.call('POST',f'bankaccounts/{AID}/reconciliations',body=body); break
+        except SystemExit as e: res={'code':'ERR','message':str(e)[:300]}; break
+        except (http.client.HTTPException, urllib.error.URLError, ConnectionError, TimeoutError):
+            time.sleep(5*(attempt+1))
+            have=retry(z.get,f'bankaccounts/{AID}/reconciliations',per_page=200)['reconciliations']   # did the dropped POST actually land?
+            if any(r['end_date']==send for r in have): res={'code':0,'message':'landed despite dropped connection'}; break
+    if res is None: res={'code':'ERR','message':'network retries exhausted'}
     open(MAN,'a').write(json.dumps({'acct':NAME,'stmt':k,'period':f'{start}..{send}','rows':len(sel),'closing':str(s['closing']),'code':res.get('code'),'message':res.get('message')})+'\n')
-    if res.get('code')!=0: print('   FAILED',res.get('message')); break
+    if res.get('code')!=0:
+        print('   FAILED',res.get('message'))
+        ids=[t['transaction_id'] for t in sel]; fresh=load(); gone=[i for i in ids if i not in fresh]
+        print('   selected ids no longer in register:',len(gone),gone[:5],'| selected',len(ids))
+        for t in sel[:0]: pass
+        break
     used|={t['transaction_id'] for t in sel}; last_end=send; prev_close=s['closing']; done+=1; time.sleep(1)
 print('reconciled this run:',done,'| last end',last_end)
