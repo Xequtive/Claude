@@ -121,3 +121,9 @@ verify by readback, not counts; write a manifest for every write.
 ### Amex progress (2026-11-17, evening)
 - Venmo charges to individuals (4 rows) categorized as transfer_fund Amex -> Friends & Family Transfers (Bank) per user. Reconciled 24.02..24.07 so far (loop for 24.08/24.09 still running when this was written); check zoho/manifests/2026-11-17_amex_reconciliations.jsonl for the latest.
 - All remaining Amex statement PDFs (24.08..26.09 + 2026-10-21) downloaded and tie to printed totals. Preview (zoho/amex_preview.py): through 25.01 clean; 25.02 onward has 260 held rows (card payments, credits like Amazon points / Uber One / digital entertainment / ADJ REDIST PURCHASE BAL, expenses without a rule, and 7 statement lines missing in Books). Awaiting user decisions on payments, credits and missing rows. zoho/amex_process_many.py runs several statements in one pass (loads the register once).
+
+### Amex progress (2026-11-17, night)
+- Reconciled 23.11..25.01 (15 statements; 25.01 closing 1,496.71). Runner zoho/amex_process_many.py now also categorizes rule-less charge rows by merchant history (>=5 samples, >=95% same account).
+- STOPPED at 25.02 (holds): 2 card payments (1,496.71 on 1/22/25 and 2,500 on 2/9/25), 2 Platinum Digital Entertainment Credits (8.65, 6.50), JEWELERS-MUTUAL 14.00 (3/3 prior -> Jewelry Insurance, below the 5-sample threshold).
+- History across the register: Platinum Digital Ent Credit 18/18, Amazon points credit 80/80, Uber One credit 4/4 -> Rewards & Reimbursements (expense_refund, debit side). Payments 44/44 -> card_payment from CapOne: 360 Checking. ADJ REDIST PURCHASE BAL: 20 as expense 'Credit Card Charges' (charge side), 10 as expense_refund (credit side).
+- Open decisions for user: card payments (82 uncategorized), credits (147 debit-side uncategorized), 7 statement lines missing in Books, lowering history threshold to 3/3.

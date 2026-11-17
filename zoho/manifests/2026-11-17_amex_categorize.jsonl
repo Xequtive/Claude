@@ -15,3 +15,5 @@
 {"stmt": "24.09", "tid": "1635470000000359306", "date": "2024-09-20", "amt": 89.13, "desc": "DEBIT ADJUSTMENT", "account": "Rewards & Reimbursements (adjustment twin)", "expense_id": "1635470000001706959", "code": 0}
 {"stmt": "24.10", "tid": "1635470000000359478", "date": "2024-10-21", "amt": 64.15, "desc": "DEBIT ADJUSTMENT", "account": "Rewards & Reimbursements (adjustment twin)", "expense_id": "1635470000002082022", "code": 0}
 {"stmt": "24.11", "tid": "1635470000000359717", "date": "2024-11-20", "amt": 74.81, "desc": "DEBIT ADJUSTMENT", "account": "Rewards & Reimbursements (adjustment twin)", "expense_id": "1635470000002083023", "code": 0}
+{"stmt": "25.01", "tid": "1635470000000354091", "date": "2025-01-21", "amt": 289.0, "desc": "DEBIT ADJUSTMENT", "account": "Rewards & Reimbursements (adjustment twin)", "expense_id": "1635470000002121027", "code": 0}
+{"stmt": "25.01", "tid": "1635470000000354092", "date": "2025-01-21", "amt": 623.38, "desc": "STATE FARM INSURANCE BLOOMINGTON IL 8009566310", "account": "Auto Insurance (history 47/47)", "expense_id": "1635470000001704900", "code": 0}
