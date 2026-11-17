@@ -100,3 +100,14 @@ verify by readback, not counts; write a manifest for every write.
 - A categorized row gets a NEW transaction_id (feed id kept in imported_transaction_id): never infer "was it retro-applied" from id order.
 - Amex Platinum: 811 -> 800 uncategorized. 515 stuck rows match autocategorize rules: 329 are twins of already-categorized rows (re-import dupes, do not categorize), 186 real. List: zoho/amex_stuck_rules_2026-11-17.md.
 - Open: categorizing the 186 real rows needs either UI re-saves of the 'real-only' rules or a per-row API lane with a plan table. Other registers not yet analysed for twins.
+
+## Amex: Platinum (account_id 1635470000000150968) - statement-by-statement reconcile (started 2026-11-17)
+- Statement PDFs: WorkDrive folder p8q2y5557c48ee9f44cb8a38e41fe6758652e, `B040 - YY.MM Statement.pdf` 23.11..26.09 (+ `2026-10-21.pdf`). Not yet renamed. Amex closes ~20th/21st; statements cut by POSTING date, so a charge dated on the closing day can sit on the NEXT statement (3 such rows at each boundary).
+- Parser/tie helper: zoho/amex_parse.py (parses Payments/Credits/New Charges/Fees, ties prev + parsed = printed New Balance; amounts can sit on a later line for the annual fee). Statement-vs-register matcher: zoho/amex_recon_helpers.py (match on date+amount+side, charges = credit side, payments = debit side).
+- Reconcile: select the Books transactions matched to the statement's rows (not by date window); start_date = day after previous closing (first rec started 2023-10-23); Books accepted straddler rows dated before start_date.
+- DONE: 23.11 (closing 3,502.71, 133 txns, rec 1635470000002121012), 23.12 (closing 8,422.44, 158 txns, rec 1635470000001731845). Manifests: 2026-11-17_amex_reconciliations.jsonl, 2026-11-17_amex_categorize.jsonl.
+- Expense categorize lane (live): `POST /banktransactions/uncategorized/{tid}/categorize/expenses?account_id=<amex>` body {date, amount, account_id:<expense COA id>, paid_through_account_id:<amex>}. (`/categorize` with transaction_type expense is rejected.)
+- Pattern: every month Amex posts a CREDIT ADJUSTMENT (rule -> Rewards & Reimbursements) and a same-day uncategorized DEBIT ADJUSTMENT twin that nets to zero: categorize the debit side as an expense to Rewards & Reimbursements (COA 1635470000000373577). Done for 12/21/23 (1,197.71) and 01/21/24 (80.66).
+- HUDSONNEWS 57.00 (11/22/23) categorized to Convenience Stores (other Hudson airport rows went there).
+- 24.01 NOT yet reconciled: blocked by the $500 'Amex Send: Transfer to Card' (1/14/24, uncategorized, transfer - on hold). Also statement shows Hampton Inn 274.56 on 01/06/24 while Books has it 01/07 (feed date differs by a day): matcher needs +-3 day fallback.
+- The 2025-06..2026-09 months also contain duplicate DEBIT ADJUSTMENT rows (id range 1377xxx vs 354xxx twins) and a few 'manual add from statement' rows.
