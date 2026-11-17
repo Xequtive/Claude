@@ -1,7 +1,25 @@
 import sys; sys.path.insert(0,'/tmp/claude-0/amex')
 from process import *
+import re, collections
+RULES=json.load(open('/home/user/claude/zoho/manifests/2026-11-17_rules_pre_resave_backup.json'))
+ACCT={d['account_name']:d['account_id'] for d in RULES.values()}
+def mkey(desc):
+    toks=re.findall(r'[A-Z]{2,}',desc.upper()); return ' '.join(toks[:2]) if len(toks)>=2 else None
+def build_hist(reg):
+    h=collections.defaultdict(collections.Counter)
+    for t in reg.values():
+        if t['_st']=='categorized' and t['debit_or_credit']=='credit' and t.get('transaction_type')=='expense' and t.get('offset_account_name'):
+            k=mkey(t['description']); 
+            if k: h[k][t['offset_account_name']]+=1
+    return h
+def hist_pick(h,desc):
+    k=mkey(desc)
+    if not k or k not in h: return None
+    name,n=h[k].most_common(1)[0]; tot=sum(h[k].values())
+    if tot>=5 and n/tot>=0.95 and name in ACCT: return name,ACCT[name],f'{n}/{tot}'
+    return None
 def run_many(names):
-    used,last=used_ids(); reg=load_register()
+    used,last=used_ids(); reg=load_register(); H=build_hist(reg)
     for n in names:
         sm,tx,sel,missing=plan(n,reg,used); fuzzy=plan.last_fuzzy
         close=d2(sm['closing']); start=(dt.date.fromisoformat(last)+dt.timedelta(days=1)).isoformat()
@@ -11,6 +29,8 @@ def run_many(names):
             desc=b['description'].upper(); rd=b.get('rule_details') or {}
             if 'DEBIT ADJUSTMENT' in desc and b['debit_or_credit']=='credit': todo.append((b,REW,'Rewards & Reimbursements (adjustment twin)'))
             elif b['debit_or_credit']=='credit' and b.get('is_rule_exist') and rd.get('transaction_type')=='expense' and rd.get('offset_account_id'): todo.append((b,rd['offset_account_id'],rd.get('offset_account_name')+' (rule '+rd.get('rule_name','')+')'))
+            elif b['debit_or_credit']=='credit' and not b.get('is_rule_exist') and hist_pick(H,b['description']):
+                nm,aid,ev=hist_pick(H,b['description']); todo.append((b,aid,f'{nm} (history {ev})'))
             else: holds.append((r,b))
         for r in missing: holds.append((r,None))
         print(f"== {n}: {start}..{close} rows {len(tx)} matched {len(sel)} fuzzy {len(fuzzy)} missing {len(missing)} cat {len(todo)} holds {len(holds)}",flush=True)
