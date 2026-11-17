@@ -81,3 +81,7 @@
 {"acct": "360 Perf Savings", "stmt": "26.07", "period": "2026-07-01..2026-07-31", "rows": 1, "closing": "733.92", "code": 0, "message": "The account has been reconciled."}
 {"acct": "360 Perf Savings", "stmt": "26.08", "period": "2026-08-01..2026-08-31", "rows": 1, "closing": "735.76", "code": 0, "message": "The account has been reconciled."}
 {"acct": "360 Perf Savings", "stmt": "26.09", "period": "2026-09-01..2026-09-30", "rows": 1, "closing": "737.56", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Manolo Savings", "stmt": "21.12", "period": "2021-12-01..2021-12-31", "rows": 3, "closing": "390.07", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Manolo Savings", "stmt": "22.01", "period": "2022-01-01..2022-01-31", "rows": 3, "closing": "720.24", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Manolo Savings", "stmt": "22.02", "period": "2022-02-01..2022-02-28", "rows": 2, "closing": "840.43", "code": 0, "message": "The account has been reconciled."}
+{"acct": "Manolo Savings", "stmt": "22.03", "period": "2022-03-01..2022-03-31", "rows": 5, "closing": "798.63", "code": 0, "message": "The account has been reconciled."}
