@@ -3,3 +3,9 @@
 {"acct": "Sophie Savings", "step": "uncategorize wrong transfer", "code": 0, "msg": "Transaction(s) have been uncategorized."}
 {"acct": "Sophie Savings", "step": "candidates", "ids": [["1635470000002084817", "transfer_fund", 10.0]]}
 {"acct": "Sophie Savings", "step": "matched to 360 Perf leg", "code": 0, "msg": "The transaction(s) has been matched."}
+{"step": "repoint T_A to 360 Perf", "tx": "1635470000002177287", "code": 0, "msg": "The bank transaction details have been updated.", "to": "CapOne: 360 Perf Savings"}
+{"acct": "360 Perf", "unwound": 46, "through": "2022-11-30"}
+{"acct": "360 Perf", "step": "duplicate transfer feed row", "tid": "1635470000002084520", "imported": "1635470000001117056", "offset": "CapOne: Manolo Savings"}
+{"acct": "360 Perf", "step": "uncategorize duplicate transfer", "code": 0, "msg": "Transaction(s) have been uncategorized."}
+{"acct": "360 Perf", "step": "candidates", "ids": [["1635470000002177287", "transfer_fund", 89.0]]}
+{"acct": "360 Perf", "step": "matched feed row to corrected transfer", "code": 0, "msg": "The transaction(s) has been matched."}
