@@ -12,6 +12,21 @@ def build_hist(reg):
             k=mkey(t['description']); 
             if k: h[k][t['offset_account_name']]+=1
     return h
+def build_hist2(reg):
+    h=collections.defaultdict(collections.Counter)
+    for t in reg.values():
+        if t['_st']!='categorized' or not t.get('offset_account_name'): continue
+        k=mkey(t['description'])
+        if not k: continue
+        side='charge' if t['debit_or_credit']=='credit' else 'pay'
+        h[(k,side)][(t.get('transaction_type'),t['offset_account_name'])]+=1
+    return h
+def pick2(h,desc,side):
+    k=mkey(desc)
+    if not k or (k,side) not in h: return None
+    (ty,name),n=h[(k,side)].most_common(1)[0]; tot=sum(h[(k,side)].values())
+    if tot>=3 and n/tot>=0.80 and name in ACCT: return ty,name,ACCT[name],f'{n}/{tot}'
+    return None
 def hist_pick(h,desc):
     k=mkey(desc)
     if not k or k not in h: return None
@@ -19,7 +34,7 @@ def hist_pick(h,desc):
     if tot>=5 and n/tot>=0.95 and name in ACCT: return name,ACCT[name],f'{n}/{tot}'
     return None
 def run_many(names):
-    used,last=used_ids(); reg=load_register(); H=build_hist(reg)
+    used,last=used_ids(); reg=load_register(); H=build_hist(reg); H2=build_hist2(reg)
     for n in names:
         sm,tx,sel,missing=plan(n,reg,used); fuzzy=plan.last_fuzzy
         close=d2(sm['closing']); start=(dt.date.fromisoformat(last)+dt.timedelta(days=1)).isoformat()
@@ -29,8 +44,10 @@ def run_many(names):
             desc=b['description'].upper(); rd=b.get('rule_details') or {}
             if 'DEBIT ADJUSTMENT' in desc and b['debit_or_credit']=='credit': todo.append((b,REW,'Rewards & Reimbursements (adjustment twin)'))
             elif b['debit_or_credit']=='credit' and b.get('is_rule_exist') and rd.get('transaction_type')=='expense' and rd.get('offset_account_id'): todo.append((b,rd['offset_account_id'],rd.get('offset_account_name')+' (rule '+rd.get('rule_name','')+')'))
-            elif b['debit_or_credit']=='credit' and not b.get('is_rule_exist') and hist_pick(H,b['description']):
-                nm,aid,ev=hist_pick(H,b['description']); todo.append((b,aid,f'{nm} (history {ev})'))
+            elif b['debit_or_credit']=='credit' and not b.get('is_rule_exist') and (pick2(H2,b['description'],'charge') or ('x',))[0]=='expense':
+                ty,nm,aid,ev=pick2(H2,b['description'],'charge'); todo.append((b,aid,f'{nm} (history {ev})'))
+            elif b['debit_or_credit']=='debit' and pick2(H2,b['description'],'pay') and pick2(H2,b['description'],'pay')[0] in ('expense_refund','card_payment'):
+                ty,nm,aid,ev=pick2(H2,b['description'],'pay'); todo.append((b,(ty,aid),f'{nm} [{ty}] (history {ev})'))
             else: holds.append((r,b))
         for r in missing: holds.append((r,None))
         print(f"== {n}: {start}..{close} rows {len(tx)} matched {len(sel)} fuzzy {len(fuzzy)} missing {len(missing)} cat {len(todo)} holds {len(holds)}",flush=True)
@@ -39,7 +56,12 @@ def run_many(names):
             for r,b in holds[:12]: print('   HOLD', (b['date']+' '+b['debit_or_credit']+' '+str(b['amount'])+' '+b['description'][:40]) if b else 'MISSING '+r['date']+' '+r['amt']+' '+r['desc'][:40])
             print('   -> stopping: holds'); return
         for b,acct,why in todo:
-            res=retry(z.call,'POST',f"banktransactions/uncategorized/{b['transaction_id']}/categorize/expenses",params={'account_id':A},body={"date":b['date'],"amount":float(b['amount']),"account_id":acct,"paid_through_account_id":A})
+            if isinstance(acct,tuple):
+                ty,aid=acct
+                body={"transaction_type":ty,"from_account_id":(aid if ty=='expense_refund' else aid),"to_account_id":A,"amount":float(b['amount']),"date":b['date']}
+                res=retry(z.call,'POST',f"banktransactions/uncategorized/{b['transaction_id']}/categorize",params={'account_id':A},body=body)
+            else:
+                res=retry(z.call,'POST',f"banktransactions/uncategorized/{b['transaction_id']}/categorize/expenses",params={'account_id':A},body={"date":b['date'],"amount":float(b['amount']),"account_id":acct,"paid_through_account_id":A})
             open(MANC,'a').write(json.dumps({'stmt':n,'tid':b['transaction_id'],'date':b['date'],'amt':b['amount'],'desc':b['description'][:60],'account':why,'expense_id':(res.get('expense') or {}).get('expense_id'),'code':res.get('code')})+'\n')
             assert res.get('code')==0,res; time.sleep(0.8)
         if todo:
@@ -53,3 +75,5 @@ def run_many(names):
         if res.get('code')!=0: return
         used|={b['transaction_id'] for r,b in sel}; last=close
 if __name__=='__main__': run_many(sys.argv[1:])
+
+if __name__=='__main__' and len(sys.argv)>1: run_many(sys.argv[1:])
