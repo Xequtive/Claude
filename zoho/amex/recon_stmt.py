@@ -22,7 +22,7 @@ def plan(n, reg, used):
     txt=open(os.path.join(STMT_DIR,f's_{n}.txt')).read(); tx,sm,by,calc=tie(txt)
     assert calc==sm['New Balance'], 'statement parse does not tie'
     pool=collections.defaultdict(list)
-    for t in sorted(reg.values(), key=lambda t:t['transaction_id']):
+    for t in sorted(reg.values(), key=lambda t:(0 if t['_st']=='categorized' else 1, t['transaction_id'])):
         if t['transaction_id'] in used: continue
         pool[(t['date'],D(str(t['amount'])),side(t))].append(t)
     sel=[]; missing=[]; 
